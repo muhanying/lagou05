@@ -20,10 +20,13 @@ class TestCalculator:
     def test_sub(self, a, b, excepted):
         print("sub")
         print(yaml.safe_load(open("./data.yml"))["data"])
-        assert self.cal.sub(Decimal(a), Decimal(b)) == Decimal(excepted)
+        res = self.cal.sub(a, b)
+        if isinstance(res, float):
+            res = round(res, 2)
+        assert res == excepted
 
     @pytest.mark.parametrize("a, b, excepted", yaml.safe_load(open("./data.yml"))["mul"])
-    def test_sub(self, a, b, excepted):
+    def test_mul(self, a, b, excepted):
         print("mul")
         print(yaml.safe_load(open("./data.yml"))["mul"])
         assert self.cal.mul(a, b) == excepted
